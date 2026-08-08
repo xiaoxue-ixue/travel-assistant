@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.stream.Collectors;
 
@@ -62,6 +63,13 @@ public class GlobalExceptionHandler {
                 .body(Result.error(500, "服务器内部错误: " + e.getMessage()));
     }
 
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<Result<Void>> handleNoResourceFoundException(NoResourceFoundException e) {
+        // 浏览器直接访问后端根路径、favicon.ico 等静态资源找不到时，静默返回 404，不打错误日志
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Result.error(404, "资源不存在"));
+    }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Result<Void>> handleException(Exception e) {
         log.error("未知异常: ", e);
@@ -69,3 +77,4 @@ public class GlobalExceptionHandler {
                 .body(Result.error(500, "服务器内部错误，请稍后重试"));
     }
 }
+
