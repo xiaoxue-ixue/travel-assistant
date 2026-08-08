@@ -1,0 +1,25 @@
+﻿server:
+  port: 8080
+
+spring:
+  application:
+    name: travel-server-dev
+
+llm:
+  provider: deepseek
+  siliconflow:
+    api-key: ${SILICONFLOW_API_KEY:your-siliconflow-api-key-here}
+    base-url: https://api.siliconflow.cn/v1
+    model: deepseek-ai/DeepSeek-V3
+    chat-model: deepseek-ai/DeepSeek-V3
+  deepseek:
+    api-key: sk-88ec6b8012124780b2968989dfe0caca
+    base-url: https://api.deepseek.com/v1
+    model: deepseek-chat
+    chat-model: deepseek-chat
+  timeout: 180000
+
+logging:
+  level:
+    com.travel.server: DEBUG
+    org.springframework.web.servlet.mvc.method.annotation: DEBUG

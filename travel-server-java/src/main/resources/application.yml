@@ -1,0 +1,36 @@
+﻿server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application:
+    name: travel-server
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+
+llm:
+  provider: deepseek
+  siliconflow:
+    api-key: your-siliconflow-api-key
+    base-url: https://api.siliconflow.cn/v1
+    model: deepseek-ai/DeepSeek-V3
+    chat-model: deepseek-ai/DeepSeek-V3
+  deepseek:
+    api-key: your-deepseek-api-key
+    base-url: https://api.deepseek.com/v1
+    model: deepseek-chat
+    chat-model: deepseek-chat
+  timeout: 180000
+
+logging:
+  level:
+    com.travel.server: DEBUG
+    org.springframework.web: INFO
